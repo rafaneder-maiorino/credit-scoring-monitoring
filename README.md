@@ -1,6 +1,8 @@
-# Tech Challenge — Fase 4: Monitoramento de Modelo de Credit Scoring
+# Monitoramento de Modelo de Credit Scoring
 
-[![CI](https://github.com/rafaneder-maiorino/tech-challenge-fase4/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rafaneder-maiorino/tech-challenge-fase4/actions/workflows/ci.yml)
+[![CI](https://github.com/rafaneder-maiorino/credit-scoring-monitoring/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rafaneder-maiorino/credit-scoring-monitoring/actions/workflows/ci.yml)
+
+> Projeto desenvolvido na Pós Tech em Machine Learning Engineering (FIAP), como Tech Challenge da Fase 4.
 
 Camada de sustentação e confiabilidade para um modelo de *credit scoring* em
 produção. O projeto usa o dataset público **Give-Me-Some-Credit** (OpenML id
