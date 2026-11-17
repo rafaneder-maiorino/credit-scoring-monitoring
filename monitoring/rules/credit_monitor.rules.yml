@@ -44,7 +44,7 @@ groups:
             {{ $labels.scenario }}. Os estágios seguintes NÃO rodaram
             (stage_status = -1) e nenhuma métrica de drift ou de predição foi
             publicada — o lote não foi pontuado.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/ContractBlocked.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/ContractBlocked.md"
 
       - alert: InsufficientSample
         expr: sample_sufficient == 0
@@ -56,7 +56,7 @@ groups:
             O lote {{ $labels.batch_id }} tem menos linhas que o mínimo de 1.000
             medido no teste A/A. O monitor ABSTEVE-SE: drift_verdict = -1. Isto
             não é verde — é ausência de veredito.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/InsufficientSample.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/InsufficientSample.md"
 
   - name: credit_monitor_drift
     interval: 15s
@@ -74,7 +74,7 @@ groups:
             {{ $labels.batch_id }}. Permanece em warning porque não satisfaz as
             duas condições do critical ao mesmo tempo: PSI acima de 0,25 E
             participação no ganho do campeão de 10% ou mais.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/FeatureDrift.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/FeatureDrift.md"
 
       # Crítico exige MAGNITUDE E IMPACTO. Uma feature com PSI alto e pouco
       # peso no modelo continua warning — é o princípio PSI x ganho (dia 7) e a
@@ -89,7 +89,7 @@ groups:
           description: >-
             PSI de {{ $labels.feature }} acima de 0,25 E a feature carrega 10% ou
             mais do ganho do campeão. Magnitude e impacto ao mesmo tempo.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/FeatureDrift.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/FeatureDrift.md"
 
       - alert: PredictionDrift
         expr: prediction_psi > 0.10
@@ -101,7 +101,7 @@ groups:
             O PSI da distribuição de probabilidades previstas passou de 0,10. É
             o sinal mais precoce disponível sem rótulo: agrega todas as features
             e existe no momento da pontuação.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/PredictionDrift.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/PredictionDrift.md"
 
   - name: credit_monitor_model_health
     interval: 15s
@@ -119,7 +119,7 @@ groups:
             0,5% da distribuição nula (-0,0056, falso alarme medido 0,6%). É o
             único sinal que enxerga drift de conceito — e chega com o atraso do
             rótulo.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/CalibrationGapBreach.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/CalibrationGapBreach.md"
 
       # Percentil 1% do nulo do AUC. Falso alarme medido 1,0%.
       - alert: AUCDrop
@@ -131,7 +131,7 @@ groups:
           description: >-
             AUC de {{ $value }}, abaixo do percentil 1% da distribuição nula
             (0,8372, falso alarme medido 1,0%). Ordenação degradada.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/AUCDrop.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/AUCDrop.md"
 
       - alert: LabelsPending
         expr: labels_pending_batches > 0
@@ -144,4 +144,4 @@ groups:
             nenhum sinal de saúde do modelo existe para eles — só drift de
             feature, que não vê drift de conceito. Medido: no cenário
             stress_only a cegueira dura 2 meses.
-          runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/LabelsPending.md"
+          runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/LabelsPending.md"

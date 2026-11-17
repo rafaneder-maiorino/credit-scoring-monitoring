@@ -56,7 +56,7 @@ tests:
             exp_annotations:
               summary: "Gap de calibração fora do nulo em month_06"
               description: "Previsto médio menos observado em -0.0337, além do percentil 0,5% da distribuição nula (-0,0056, falso alarme medido 0,6%). É o único sinal que enxerga drift de conceito — e chega com o atraso do rótulo."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/CalibrationGapBreach.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/CalibrationGapBreach.md"
       - eval_time: 1m
         alertname: AUCDrop
         exp_alerts:
@@ -68,7 +68,7 @@ tests:
             exp_annotations:
               summary: "AUC abaixo do nulo em month_06"
               description: "AUC de 0.7917, abaixo do percentil 1% da distribuição nula (0,8372, falso alarme medido 1,0%). Ordenação degradada."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/AUCDrop.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/AUCDrop.md"
 
   # ------------------------------------------------------------------------
   # Antes de o rótulo chegar, o MESMO lote não tem alerta de saúde nenhum.
@@ -99,7 +99,7 @@ tests:
             exp_annotations:
               summary: "2 lote(s) sem desfecho em stress_only"
               description: "Lotes pontuados cujo rótulo ainda não chegou. Durante essa janela nenhum sinal de saúde do modelo existe para eles — só drift de feature, que não vê drift de conceito. Medido: no cenário stress_only a cegueira dura 2 meses."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/LabelsPending.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/LabelsPending.md"
 
   # ------------------------------------------------------------------------
   # Severidade segue o impacto, não a magnitude.
@@ -131,7 +131,7 @@ tests:
             exp_annotations:
               summary: "Drift em age (month_06)"
               description: "PSI de age acima de 0,10 no lote month_06. Permanece em warning porque não satisfaz as duas condições do critical ao mesmo tempo: PSI acima de 0,25 E participação no ganho do campeão de 10% ou mais."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/FeatureDrift.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/FeatureDrift.md"
       - eval_time: 1m
         alertname: FeatureDriftCritical
         exp_alerts:
@@ -144,7 +144,7 @@ tests:
             exp_annotations:
               summary: "Drift crítico em NumberOfTimes90DaysLate (month_06)"
               description: "PSI de NumberOfTimes90DaysLate acima de 0,25 E a feature carrega 10% ou mais do ganho do campeão. Magnitude e impacto ao mesmo tempo."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/FeatureDrift.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/FeatureDrift.md"
 
   # ------------------------------------------------------------------------
   # Pipeline: bloqueio e abstenção.
@@ -173,7 +173,7 @@ tests:
             exp_annotations:
               summary: "Contrato bloqueou o lote dirty_batch"
               description: "O contrato de dados recusou o lote dirty_batch do cenário full. Os estágios seguintes NÃO rodaram (stage_status = -1) e nenhuma métrica de drift ou de predição foi publicada — o lote não foi pontuado."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/ContractBlocked.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/ContractBlocked.md"
       # Um estágio pulado (-1) NÃO dispara ContractBlocked: só o que falhou.
       - eval_time: 1m
         alertname: InsufficientSample
@@ -186,7 +186,7 @@ tests:
             exp_annotations:
               summary: "Amostra insuficiente em small_demo"
               description: "O lote small_demo tem menos linhas que o mínimo de 1.000 medido no teste A/A. O monitor ABSTEVE-SE: drift_verdict = -1. Isto não é verde — é ausência de veredito."
-              runbook_url: "https://github.com/rafaneder-maiorino/tech-challenge-fase4/blob/main/docs/runbooks/InsufficientSample.md"
+              runbook_url: "https://github.com/rafaneder-maiorino/credit-scoring-monitoring/blob/main/docs/runbooks/InsufficientSample.md"
 
   # ------------------------------------------------------------------------
   # Um lote saudável não dispara nada. Sem isto, uma regra sempre-verdadeira
